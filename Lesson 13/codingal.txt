@@ -1,0 +1,6 @@
+Hi! I am Penguin. I am 1 yr. old
+ File in append mode ....Hi! I am Penguin. I am 1 yr. old
+ My name is Muhammad taha
+ I am writting a short text
+ of some lines and I am
+ going to use it for my activitie.
