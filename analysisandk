@@ -1,0 +1,76 @@
+def binary_search_iterative(seats, target):
+    """
+    Searches for a seat number in a sorted list using an iterative approach.
+    
+    Time Complexity: O(log n)
+    Space Complexity: O(1) - Constant memory, no call stack overhead.
+    """
+    low = 0
+    high = len(seats) - 1
+
+    while low <= high:
+        mid = (low + high) // 2
+        
+        # Check if target is present at mid
+        if seats[mid] == target:
+            return mid  # Return the index of the found seat
+        
+        # If target is greater, ignore left half
+        elif seats[mid] < target:
+            low = mid + 1
+            
+        # If target is smaller, ignore right half
+        else:
+            high = mid - 1
+            
+    return -1  # Seat not found
+
+
+def binary_search_recursive(seats, target, low, high):
+    """
+    Searches for a seat number in a sorted list using a recursive approach.
+    
+    Time Complexity: O(log n)
+    Space Complexity: O(log n) - Due to the recursive call stack.
+    """
+    # Base case: target is not present in the array
+    if low > high:
+        return -1
+
+    mid = (low + high) // 2
+
+    # Check if target is present at mid
+    if seats[mid] == target:
+        return mid
+    
+    # If target is greater, search right half recursively
+    elif seats[mid] < target:
+        return binary_search_recursive(seats, target, mid + 1, high)
+        
+    # If target is smaller, search left half recursively
+    else:
+        return binary_search_recursive(seats, target, low, mid - 1)
+
+
+# --- Example Usage & Testing ---
+if __name__ == "__main__":
+    # A sorted list representing allocated/available train seat numbers
+    train_seats = [12, 18, 25, 33, 42, 55, 68, 71, 85, 90]
+    seat_to_find = 42
+
+    print(f"Train Seats Layout: {train_seats}")
+    print(f"Searching for Seat Number: {seat_to_find}\n")
+
+    # 1. Test Iterative Binary Search
+    idx_iterative = binary_search_iterative(train_seats, seat_to_find)
+    if idx_iterative != -1:
+        print(f"[Iterative] Seat found at index: {idx_iterative}")
+    else:
+        print("[Iterative] Seat not found.")
+
+    # 2. Test Recursive Binary Search
+    idx_recursive = binary_search_recursive(train_seats, seat_to_find, 0, len(train_seats) - 1)
+    if idx_recursive != -1:
+        print(f"[Recursive] Seat found at index: {idx_recursive}")
+    else:
+        print("[Recursive] Seat not found.")
